@@ -9,22 +9,37 @@
 <body>
   <header class="site-header">
     <div class="brand">FEBIANA DWI MULYANI</div>
+    <nav class="nav">
+      <button id="previewBtn" class="btn">Preview</button>
+      <button id="copyBtn" class="btn ghost">Salin URL</button>
+      <button id="themeToggle" class="btn">Dark</button>
+    </nav>
   </header>
 
   <main class="container">
-    <section class="intro">
-      <h1>Selamat datang</h1>
-      <p>Situs sederhana ini menampilkan perbandingan fitur GitHub Pages dan Hosting Tradisional.</p>
+    <section class="hero">
+      <div>
+        <h1>Halo, saya Febiana</h1>
+        <p class="lead">Sebuah dashboard sederhana yang membandingkan GitHub Pages dan hosting tradisional.</p>
+        <div class="actions">
+          <a class="btn primary" href="https://febianadwimulyani2007-hue.github.io/febi_web/" target="_blank" rel="noreferrer">Buka Situs</a>
+          <button id="previewMobile" class="btn">Pratinjau</button>
+        </div>
+      </div>
+      <div class="hero-card card">
+        <h3>Status Hosting</h3>
+        <p id="pagesStatus">Memeriksa status...</p>
+      </div>
     </section>
 
-    <section class="features">
+    <section class="features-grid">
       <div class="card">
         <h2>GitHub Pages</h2>
         <ul>
           <li><strong>Biaya:</strong> Gratis selamanya</li>
           <li><strong>Setup:</strong> Otomatis (Git-based)</li>
           <li><strong>Backend Support:</strong> Hanya statis</li>
-          <li><strong>Bandwidth:</strong> Sangat tinggi (untuk situs statis)</li>
+          <li><strong>Bandwidth:</strong> Tinggi untuk konten statis</li>
         </ul>
       </div>
 
@@ -37,16 +52,34 @@
           <li><strong>Bandwidth:</strong> Terbatas per paket</li>
         </ul>
       </div>
+
+      <div class="card">
+        <h2>Fitur Tambahan</h2>
+        <ul>
+          <li>Dark mode</li>
+          <li>Salin URL otomatis</li>
+          <li>Pratinjau cepat</li>
+        </ul>
+      </div>
+
+      <div class="card contact">
+        <h2>Kontak</h2>
+        <p>Email: <a href="mailto:febiana@example.com">febiana@example.com</a></p>
+        <a class="btn" href="#">Download CV</a>
+      </div>
     </section>
 
     <section class="notes">
       <h3>Catatan singkat</h3>
-      <p>Gunakan GitHub Pages untuk situs profil atau portofolio statis. Pilih hosting tradisional bila membutuhkan PHP, database, atau backend dinamis.</p>
+      <p>Gunakan GitHub Pages untuk portofolio statis. Pilih hosting tradisional bila membutuhkan backend dinamis.</p>
     </section>
   </main>
 
   <footer class="site-footer">
     <small>© 2026 Febiana Dwi Mulyani</small>
   </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="assets/script.js"></script>
 </body>
 </html>
