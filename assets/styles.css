@@ -46,3 +46,24 @@ body{font-family:Inter,ui-sans-serif,system-ui,Helvetica,Arial,sans-serif;backgr
 html.dark,html.dark body{background:var(--bg);color:#e6eef9}
 html.dark .card{background:var(--card);box-shadow:none}
 
+/* Counters */
+.counters .stats{display:flex;gap:18px;justify-content:space-between;margin-top:12px}
+.stat{flex:1;text-align:center}
+.number{font-size:28px;font-weight:800;color:var(--accent)}
+.label{color:var(--muted);margin-top:6px}
+
+/* Accordion */
+.accordion{margin-top:8px}
+.accordion-item{width:100%;text-align:left;padding:12px;border:0;background:transparent;border-bottom:1px solid rgba(16,24,40,0.04);display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.panel{display:none;padding:10px 12px;color:var(--muted)}
+.accordion-item.open + .panel{display:block}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.5);z-index:60}
+.modal[aria-hidden="false"]{display:flex}
+.modal-content{background:var(--card);padding:18px;border-radius:10px;max-width:520px;width:90%;position:relative}
+.modal-close{position:absolute;right:12px;top:10px;border:0;background:transparent;font-size:18px;cursor:pointer}
+.modal-content label{display:block;margin-top:8px;font-size:14px}
+.modal-content input,.modal-content textarea{width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid rgba(16,24,40,0.06)}
+
+

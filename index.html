@@ -64,11 +64,62 @@
 
       <div class="card contact">
         <h2>Kontak</h2>
-        <p>Email: <a href="mailto:febiana@example.com">febiana@example.com</a></p>
-        <a class="btn" href="#">Download CV</a>
+        <p>Email: <a id="emailLink" href="mailto:febiana@example.com">febiana@example.com</a></p>
+        <div style="display:flex;gap:8px;margin-top:8px;">
+          <button id="copyEmail" class="btn ghost">Salin Email</button>
+          <a class="btn" href="#" id="downloadCv">Download CV</a>
+        </div>
       </div>
     </section>
 
+    <section class="counters">
+      <div class="card">
+        <h3>Statistik</h3>
+        <div class="stats">
+          <div class="stat">
+            <div class="number" data-target="12">0</div>
+            <div class="label">Proyek</div>
+          </div>
+          <div class="stat">
+            <div class="number" data-target="5">0</div>
+            <div class="label">Klien</div>
+          </div>
+          <div class="stat">
+            <div class="number" data-target="24">0</div>
+            <div class="label">Konten</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="card">
+        <h3>FAQ</h3>
+        <div class="accordion">
+          <button class="accordion-item">Apa itu GitHub Pages?<span class="acc-arrow">▸</span></button>
+          <div class="panel">Layanan hosting statis gratis dari GitHub untuk proyek publik dan pribadi.</div>
+          <button class="accordion-item">Kenapa pilih hosting tradisional?<span class="acc-arrow">▸</span></button>
+          <div class="panel">Untuk aplikasi dinamis yang membutuhkan PHP, database, atau konfigurasi server khusus.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact modal -->
+    <div id="modal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <button id="closeModal" class="modal-close">✕</button>
+        <h3>Hubungi Febiana</h3>
+        <form id="contactForm">
+          <label>Nama<input type="text" name="name" required></label>
+          <label>Email<input type="email" name="email" required></label>
+          <label>Pesan<textarea name="message" rows="4" required></textarea></label>
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
+            <button type="submit" class="btn primary">Kirim</button>
+            <button type="button" id="modalCancel" class="btn ghost">Batal</button>
+          </div>
+        </form>
+      </div>
+    </div>
     <section class="notes">
       <h3>Catatan singkat</h3>
       <p>Gunakan GitHub Pages untuk portofolio statis. Pilih hosting tradisional bila membutuhkan backend dinamis.</p>

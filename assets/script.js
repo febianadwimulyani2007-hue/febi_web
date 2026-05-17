@@ -45,4 +45,67 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   checkPages();
+
+  // Theme persistence
+  const saved = localStorage.getItem('theme');
+  if(saved === 'dark') document.documentElement.classList.add('dark');
+
+  // Counters animation
+  const counters = document.querySelectorAll('.number');
+  function animateCounters(){
+    counters.forEach(el=>{
+      const target = +el.dataset.target || 0;
+      let cur = 0; const step = Math.max(1, Math.floor(target/60));
+      const iv = setInterval(()=>{
+        cur += step; if(cur >= target){el.textContent = target; clearInterval(iv)} else el.textContent = cur;
+      },16);
+    });
+  }
+  // Start when visible
+  const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){animateCounters(); obs.disconnect();}})} ,{threshold:0.3});
+  document.querySelectorAll('.counters .card').forEach(c=>obs.observe(c));
+
+  // Accordion
+  document.querySelectorAll('.accordion-item').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const open = btn.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      const panel = btn.nextElementSibling;
+      if(open) panel.style.display = 'block'; else panel.style.display = 'none';
+    });
+  });
+
+  // Modal contact
+  const modal = document.getElementById('modal');
+  const closeModal = document.getElementById('closeModal');
+  const modalCancel = document.getElementById('modalCancel');
+  document.getElementById('downloadCv').addEventListener('click', (e)=>{e.preventDefault(); showToast('Fitur download belum diisi')});
+  // Show modal when clicking contact link
+  document.getElementById('contactForm') && (document.getElementById('contactForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const msg = `Nama: ${fd.get('name')}\nEmail: ${fd.get('email')}\nPesan: ${fd.get('message')}`;
+    showToast('Form dikirim (mailto)');
+    window.location.href = `mailto:febiana@example.com?subject=Pesan%20dari%20situs&body=${encodeURIComponent(msg)}`;
+  }));
+  // Copy email
+  const copyEmail = document.getElementById('copyEmail');
+  copyEmail && copyEmail.addEventListener('click', async ()=>{
+    try{ await navigator.clipboard.writeText('febiana@example.com'); showToast('Email disalin'); }
+    catch(e){ showToast('Gagal menyalin email'); }
+  });
+
+  // Modal controls
+  closeModal && closeModal.addEventListener('click', ()=>{ modal.setAttribute('aria-hidden','true'); });
+  modalCancel && modalCancel.addEventListener('click', ()=>{ modal.setAttribute('aria-hidden','true'); });
+  // open modal when clicking contact card button (make card clickable)
+  const contactCard = document.querySelector('.card.contact');
+  contactCard && contactCard.addEventListener('dblclick', ()=>{ modal.setAttribute('aria-hidden','false'); });
+
+  // Persist theme toggles
+  themeToggle.addEventListener('click', ()=>{
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    themeToggle.textContent = isDark ? 'Light' : 'Dark';
+  });
 });
