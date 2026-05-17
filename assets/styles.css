@@ -46,6 +46,27 @@ body{font-family:Inter,ui-sans-serif,system-ui,Helvetica,Arial,sans-serif;backgr
 html.dark,html.dark body{background:var(--bg);color:#e6eef9}
 html.dark .card{background:var(--card);box-shadow:none}
 
+/* Toolbar */
+.toolbar{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.tool{background:transparent;border:1px solid rgba(16,24,40,0.06);padding:6px 8px;border-radius:8px;cursor:pointer}
+
+/* Interactive area layout */
+.interactive{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-top:14px}
+.interactive .card{min-height:120px}
+.todo-card #todoList{max-height:140px;overflow:auto}
+.todo-item{display:flex;justify-content:space-between;padding:6px 8px;border-bottom:1px solid rgba(16,24,40,0.04)}
+.todo-item button{background:transparent;border:0;color:var(--accent);cursor:pointer}
+
+.clock{font-weight:800;font-size:20px}
+
+.stars span{font-size:22px;cursor:pointer;padding:4px}
+.stars .active{color:gold}
+
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gitem{background:rgba(16,24,40,0.04);padding:18px;text-align:center;border-radius:8px}
+
+@media (max-width:820px){.interactive{grid-template-columns:1fr}}
+
 /* Counters */
 .counters .stats{display:flex;gap:18px;justify-content:space-between;margin-top:12px}
 .stat{flex:1;text-align:center}

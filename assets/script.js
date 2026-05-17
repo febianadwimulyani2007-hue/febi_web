@@ -108,4 +108,78 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     themeToggle.textContent = isDark ? 'Light' : 'Dark';
   });
+
+  // --- New interactive features ---
+  const toggleLayout = document.getElementById('toggleLayout');
+  const featuresGrid = document.querySelector('.features-grid');
+  toggleLayout && toggleLayout.addEventListener('click', ()=>{
+    featuresGrid.classList.toggle('list');
+    showToast('Layout toggled');
+  });
+
+  // Randomize accent
+  const randomAccent = document.getElementById('randomAccent');
+  randomAccent && randomAccent.addEventListener('click', ()=>{
+    const c = '#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+    document.documentElement.style.setProperty('--accent', c);
+    localStorage.setItem('accent', c);
+    showToast('Accent changed');
+  });
+  // restore accent
+  const savedAccent = localStorage.getItem('accent'); if(savedAccent) document.documentElement.style.setProperty('--accent', savedAccent);
+
+  // Todo list
+  const todoInput = document.getElementById('todoInput');
+  const todoAdd = document.getElementById('todoAdd');
+  const todoList = document.getElementById('todoList');
+  let todos = JSON.parse(localStorage.getItem('todos')||'[]');
+  function renderTodos(){ todoList.innerHTML=''; todos.forEach((t,i)=>{
+    const div = document.createElement('div'); div.className='todo-item'; div.innerHTML=`<span>${t}</span><button data-i="${i}">✕</button>`;
+    div.querySelector('button').addEventListener('click', e=>{ todos.splice(i,1); saveRender(); });
+    todoList.appendChild(div);
+  }); }
+  function saveRender(){ localStorage.setItem('todos', JSON.stringify(todos)); renderTodos(); }
+  todoAdd && todoAdd.addEventListener('click', ()=>{ if(!todoInput.value) return showToast('Isi tugas'); todos.push(todoInput.value); todoInput.value=''; saveRender(); });
+  renderTodos();
+
+  // Clock
+  const clockDisplay = document.getElementById('clockDisplay');
+  function tick(){ const d=new Date(); clockDisplay.textContent = d.toLocaleTimeString(); }
+  tick(); setInterval(tick,1000);
+
+  // Rating
+  const stars = document.getElementById('stars');
+  if(stars){ const savedRating = localStorage.getItem('rating')||0; Array.from(stars.children).forEach(s=>{ const n=+s.dataset.star; if(n<=savedRating) s.classList.add('active'); s.addEventListener('click', ()=>{ localStorage.setItem('rating', n); Array.from(stars.children).forEach(x=>x.classList.toggle('active', +x.dataset.star<=n)); showToast('Terima kasih atas ratingnya'); }); }); }
+
+  // Gallery modal
+  const galleryModal = document.getElementById('galleryModal');
+  const openGallery = document.getElementById('openGallery');
+  const closeGallery = document.getElementById('closeGallery');
+  openGallery && openGallery.addEventListener('click', ()=>{ galleryModal.setAttribute('aria-hidden','false'); });
+  closeGallery && closeGallery.addEventListener('click', ()=>{ galleryModal.setAttribute('aria-hidden','true'); });
+
+  // Share
+  const shareBtn = document.getElementById('shareBtn');
+  shareBtn && shareBtn.addEventListener('click', async ()=>{
+    const shareData = {title:document.title,text:'Lihat situs Febiana',url:window.location.href};
+    try{ if(navigator.share){ await navigator.share(shareData); } else { await navigator.clipboard.writeText(window.location.href); showToast('Link disalin'); } }
+    catch(e){ showToast('Gagal share'); }
+  });
+
+  // Clear cache (hard reload)
+  const clearCache = document.getElementById('clearCache');
+  clearCache && clearCache.addEventListener('click', ()=>{ location.reload(true); });
+
+  // Language toggle (simple)
+  const langToggle = document.getElementById('langToggle');
+  const texts = { en: { welcome: 'Hello, I am Febiana', lead:'A simple dashboard.' }, id: { welcome:'Halo, saya Febiana', lead:'Sebuah dashboard sederhana.' } };
+  langToggle && langToggle.addEventListener('click', ()=>{
+    const cur = document.documentElement.getAttribute('lang') || 'id'; const next = cur==='id' ? 'en' : 'id'; document.documentElement.setAttribute('lang', next);
+    document.querySelector('.hero h1').textContent = texts[next].welcome; document.querySelector('.lead').textContent = texts[next].lead;
+    showToast('Language: '+next);
+  });
+
+  // Preview button open
+  previewBtn && previewBtn.addEventListener('click', ()=>{ window.open('https://febianadwimulyani2007-hue.github.io/febi_web/','_blank'); });
+
 });

@@ -14,6 +14,17 @@
       <button id="copyBtn" class="btn ghost">Salin URL</button>
       <button id="themeToggle" class="btn">Dark</button>
     </nav>
+    <div class="toolbar">
+      <button id="toggleLayout" class="tool">Toggle Layout</button>
+      <button id="randomAccent" class="tool">Random Accent</button>
+      <button id="openTodo" class="tool">Todo</button>
+      <button id="showClock" class="tool">Clock</button>
+      <button id="openGallery" class="tool">Gallery</button>
+      <button id="rateBtn" class="tool">Rate</button>
+      <button id="shareBtn" class="tool">Share</button>
+      <button id="clearCache" class="tool">Clear Cache</button>
+      <button id="langToggle" class="tool">EN/ID</button>
+    </div>
   </header>
 
   <main class="container">
@@ -71,6 +82,46 @@
         </div>
       </div>
     </section>
+
+    <section id="interactiveArea" class="interactive">
+      <div class="card todo-card" id="todoCard">
+        <h3>Todo</h3>
+        <div id="todoList"></div>
+        <div style="margin-top:8px;display:flex;gap:8px;">
+          <input id="todoInput" placeholder="Tambahkan tugas...">
+          <button id="todoAdd" class="btn">Tambah</button>
+        </div>
+      </div>
+
+      <div class="card clock-card" id="clockCard">
+        <h3>Clock</h3>
+        <div id="clockDisplay" class="clock">--:--:--</div>
+      </div>
+
+      <div class="card rating-card">
+        <h3>Rating</h3>
+        <div id="stars" class="stars">
+          <span data-star="1">☆</span>
+          <span data-star="2">☆</span>
+          <span data-star="3">☆</span>
+          <span data-star="4">☆</span>
+          <span data-star="5">☆</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery modal small -->
+    <div id="galleryModal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <button id="closeGallery" class="modal-close">✕</button>
+        <h3>Gallery</h3>
+        <div class="gallery-grid">
+          <div class="gitem">Image 1</div>
+          <div class="gitem">Image 2</div>
+          <div class="gitem">Image 3</div>
+        </div>
+      </div>
+    </div>
 
     <section class="counters">
       <div class="card">
